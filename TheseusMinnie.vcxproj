@@ -65,9 +65,13 @@
     <ClCompile Include="TaM_mainDisplay.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="TaM_Actor.h" />
     <ClInclude Include="TaM_defHeaders.h" />
+    <ClInclude Include="TaM_Drawable.h" />
     <ClInclude Include="TaM_main.h" />
     <ClInclude Include="TaM_mainDisplay.h" />
+    <ClInclude Include="TaM_Map.h" />
+    <ClInclude Include="TaM_simpleTypes.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

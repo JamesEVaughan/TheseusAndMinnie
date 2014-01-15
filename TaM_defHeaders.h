@@ -1,6 +1,6 @@
 // This is header contains mainly system and library headers used throughout the application.
-#ifndef TaM_DEF_HEADERS
-#define	TaM_DEF_HEADERS
+#ifndef TAM_DEF_HEADERS
+#define	TAM_DEF_HEADERS
 
 // GLFW is included first
 #include <GLFW\glfw3.h>

@@ -32,5 +32,17 @@
     <ClInclude Include="TaM_main.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="TaM_simpleTypes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TaM_Actor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TaM_Drawable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TaM_Map.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

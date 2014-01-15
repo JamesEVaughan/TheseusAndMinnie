@@ -44,6 +44,14 @@ GLFWwindow *TaM_viewInit_direct() {
 
 	glfwMakeContextCurrent(ptrW);
 
+	// Setup a black background
+	int width, height;
+	glfwGetFramebufferSize(ptrW, &width, &height);
+	glViewport(0, 0, width, height);
+	glClear(GL_COLOR_BUFFER_BIT);
+	glfwSwapBuffers(ptrW);
+	
+
 	// Everything go well? Groovy!
 	return ptrW;
 }
