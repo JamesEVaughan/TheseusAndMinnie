@@ -9,4 +9,8 @@
 // System files
 #include <stdlib.h>
 #include <stdio.h>
+
+// Super common TaM files
+#include "TaM_Definitions.h"
+#include "TaM_simpleTypes.h"
 #endif

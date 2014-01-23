@@ -15,11 +15,10 @@ class TaM_IntVector {
 private:
 	int val1;
 	int val2;
-	TaM_IntVector(int one, int two);
 
 public:
-	// Make function.
-	TaM_IntVector makeIntVector(int one, int two);
+	// Constructor
+	TaM_IntVector(int one, int two);
 
 	// Accessors
 	int get1() {return val1;}
