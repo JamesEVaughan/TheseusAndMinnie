@@ -3,10 +3,14 @@
 #define	TAM_DEF_HEADERS
 
 // GLFW is included first
-#include <GLFW\glfw3.h>
+#ifndef TAM_GLFW
 #define TaM_GLFW	// Flags glfw.h as having been included for files that need to directly include glfw
+#include <GLFW\glfw3.h>
+#endif
+
 
 // System files
+/********		ALL CORE FILES ARE INCLUDED HERE!!!	***********/
 #include <stdlib.h>
 #include <stdio.h>
 

@@ -3,6 +3,8 @@
 #include "TaM_defHeaders.h"
 #include "TaM_main.h"
 
+#include "TaM_LineList.h"
+
 using namespace std;
 
 #define	TaM_WINDOW_X	640
@@ -71,6 +73,25 @@ static void TaM_kbCallback_direct(GLFWwindow *ptrW, int key, int sCode, int act,
 }
 
 void TaM_mainloop_direct(GLFWwindow *ptrW) {
+	TaM_LineList *tempy = new TaM_LineList(1.f, 0.f, 0.f);
+
+	// Add some lines
+	tempy->addLine(0.8f, 0.8f, -0.8f, -0.8f);
+	tempy->addLine(-0.8f, 0.8f, 0.8f, -0.8f);
+
+	tempy->addLine(0.8f, 0.8f, 0.8f, -0.8f);
+	tempy->addLine(0.8f, -0.8f, -0.8f, -0.8f);
+	tempy->addLine(-0.8f, -0.8f, -0.8f, 0.8f);
+	tempy->addLine(-0.8f, 0.8f, 0.8f, 0.8f);
+	// Setup the viewport
+	int width, height;
+	glfwGetFramebufferSize(ptrW, &width, &height);
+	glViewport(0, 0, width, height);
+	glClear(GL_COLOR_BUFFER_BIT);
+	// It should be an X!
+	tempy->drawLines();
+	// Swap those buffers!
+	glfwSwapBuffers(ptrW);
 	while(!glfwWindowShouldClose(ptrW)) {
 
 		glfwPollEvents();

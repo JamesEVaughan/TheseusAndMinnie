@@ -24,6 +24,9 @@
     <ClCompile Include="TaM_simpleTypes.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="TaM_LineList.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TaM_defHeaders.h">
@@ -48,6 +51,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="TaM_Definitions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TaM_LineList.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

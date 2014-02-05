@@ -16,9 +16,7 @@ class TaM_Map : public TaM_Drawable {
 private:
 	TaM_IntVector size;
 	char *spaces;		// Only use SPC_ functs to interact! Explanation for each space
-
-
-
+	TaM_LineList wallHelper;
 
 	// Helper functions for *spaces so I don't fuck it up
 	void SPC_create(TaM_IntVector dim) {spaces = new char[(dim.get1() * dim.get2()];}
