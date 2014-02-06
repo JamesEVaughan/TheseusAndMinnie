@@ -14,9 +14,10 @@ public:
 	// Draws from object space. Matrix setup is user defined.
 	virtual void draw() = 0;
 
-	// Sets size of draw space to (x, y). Object will be scaled, if 
-	//	isScaled is true. Only portion drawn if false.
-	virtual void setSize(TaM_IntVector newSize, bool isScaled) = 0;
+	/* Sets size of draw space to (x, y). Object will be scaled, if 
+		isScaled is true. Only portion drawn if false. */
+	// Removed, no reason for this to exist.
+	//virtual void setSize(TaM_IntVector newSize, bool isScaled) = 0;
 
 	// Returns how big (in pixels) the object is
 	virtual TaM_IntVector getSize() = 0;

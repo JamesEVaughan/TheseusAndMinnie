@@ -9,3 +9,8 @@ TaM_IntVector::TaM_IntVector(int one, int two) {
 	val1 = one;
 	val2 = two;
 }
+
+TaM_IntVector::TaM_IntVector() {
+	val1 = 0;
+	val2 = 0;
+}

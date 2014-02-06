@@ -27,6 +27,9 @@
     <ClCompile Include="TaM_LineList.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="TaM_Map.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TaM_defHeaders.h">

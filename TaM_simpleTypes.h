@@ -19,6 +19,7 @@ private:
 public:
 	// Constructor
 	TaM_IntVector(int one, int two);
+	TaM_IntVector();
 
 	// Accessors
 	int get1() {return val1;}

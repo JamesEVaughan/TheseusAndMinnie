@@ -3,7 +3,7 @@
 #include "TaM_defHeaders.h"
 #include "TaM_main.h"
 
-#include "TaM_LineList.h"
+#include "TaM_Map.h"
 
 using namespace std;
 
@@ -25,6 +25,15 @@ int main(int argc, char *args[]) {
 		return 0;
 	}
 
+	// Test of TaM_Map
+	TaM_Map testaroni;
+	int err = testaroni.init("Maps\\Map1.tam");
+	if (err) {
+		cout << "Error code: " << err << " produced.\n";
+	}
+	else {
+		testaroni.writeToConsole();
+	}
 	
 	TaM_mainloop_direct(theWnd);
 	

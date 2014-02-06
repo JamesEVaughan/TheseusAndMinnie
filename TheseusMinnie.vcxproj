@@ -64,6 +64,7 @@
     <ClCompile Include="TaM_LineList.cpp" />
     <ClCompile Include="TaM_main.cpp" />
     <ClCompile Include="TaM_mainDisplay.cpp" />
+    <ClCompile Include="TaM_Map.cpp" />
     <ClCompile Include="TaM_simpleTypes.cpp" />
   </ItemGroup>
   <ItemGroup>

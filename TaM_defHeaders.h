@@ -13,6 +13,9 @@
 /********		ALL CORE FILES ARE INCLUDED HERE!!!	***********/
 #include <stdlib.h>
 #include <stdio.h>
+#include <string>
+#include <fstream>
+#include <iostream>
 
 // Super common TaM files
 #include "TaM_Definitions.h"
