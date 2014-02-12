@@ -43,6 +43,7 @@ TaM_LineList::~TaM_LineList() {
 void TaM_LineList::addLine(GLfloat x1, GLfloat y1, GLfloat x2, GLfloat y2) {
 	TaM_LineNode *tempy = new TaM_LineNode(x1, y1, x2, y2);
 	if (head == NULL) {
+		// Special case: first line
 		head = tail = tempy;
 	}
 	else {

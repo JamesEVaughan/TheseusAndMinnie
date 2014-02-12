@@ -15,11 +15,9 @@ and walls.
 
 using namespace std;
 
-
 class TaM_Map : public TaM_Drawable {
 private:
-	TaM_IntVector *sizePx;	// In pixels
-	TaM_IntVector *sizeSq;	// In spaces
+	TaM_IntVector *sizeSq;	// Size of the map in spaces
 	char *spaces;			// Only use SPC_ functs to interact! Explanation for each space
 	TaM_LineList *wallHelper;
 	string name;

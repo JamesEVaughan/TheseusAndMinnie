@@ -40,12 +40,14 @@
 /***********************
 	Draw aids
 ************************/
-#define SQUARE_SIZE	40	// The size, in pixels, of the side of one square
+#define SQUARE_SIZE		0.125f	// The size of the side of one square in the mapspace
+#define MAX_GRID_SIZE	16		// This is the maximum number of squares for a map (includes border)
 
 // Colors in (R, G, B), floats, for use in glColr3f()
-#define	COLOR_WALL	0.f, 0.9f, 0.f
-#define	COLOR_THE	0.f, 0.f, 0.8f
-#define	COLOR_MIN	0.75f, 0.5f, 0.5f	// Pink?
+#define	TAM_COLOR_WALL	0.f, 0.9f, 0.f
+#define	TAM_COLOR_THE	0.f, 0.f, 0.8f
+#define	TAM_COLOR_MIN	0.75f, 0.5f, 0.5f	// Pink?
+#define TAM_COLOR_END	0.9f, 0.f, 0.f
 
 
 /***********************
