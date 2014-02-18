@@ -61,6 +61,8 @@ void TaM_LineList::drawLines() {
 	
 	// Let's start the lines!
 	glBegin(GL_LINES);
+	// Debugging, see what points are being made
+	//glBegin(GL_POINTS);
 		// Set current color
 		glColor3f(color[0], color[1], color[2]);
 
@@ -73,4 +75,20 @@ void TaM_LineList::drawLines() {
 
 	// Done!
 	glEnd();
+}
+
+// Debugging: prints values to console
+void TaM_LineList::writeToConsole() {
+	TaM_LineNode *cur = head;
+	int i = 0;
+
+	while (cur != NULL) {
+		printf("Line %d - Start: (%.4f, %.4f) End (%.4f, %.4f)\n", 
+			i++, cur->start[0], cur->start[1], cur->end[0], cur->end[1]);
+		if (i > 30) {
+			// Something's fucked...
+			return;
+		}
+		cur = cur->next;
+	}
 }

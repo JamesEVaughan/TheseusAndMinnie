@@ -32,6 +32,10 @@ public:
 
 	// Draws the lines to the established context
 	void drawLines();
+
+	// Debug functions
+	// Prints the line coordinates to the console
+	void writeToConsole();
 };
 
 class TaM_LineNode {

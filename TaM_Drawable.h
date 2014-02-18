@@ -20,7 +20,8 @@ public:
 	//virtual void setSize(TaM_IntVector newSize, bool isScaled) = 0;
 
 	// Returns how big (in pixels) the object is
-	virtual TaM_IntVector getSize() = 0;
+	// Removed, no reason for this to exist
+	//virtual TaM_IntVector getSize() = 0;
 };
 
 #endif

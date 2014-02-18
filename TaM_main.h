@@ -1,6 +1,13 @@
 // Header for the start of Theseus and Minne. May or may not ever be needed...
 
+#ifndef	TAM_MAIN
+#define	TAM_MAIN
+
 #include "TaM_defHeaders.h"
+#include "TaM_Drawable.h"
+#include "TaM_Map.h"
+#include "TaM_Theseus.h"
+
 
 /***** TaM_viewInit_direct
 	* Initializes the view window for the entire app.
@@ -52,3 +59,19 @@ static void TaM_kbCallback_direct(GLFWwindow *ptrW, int key, int sCode, int act,
 	
 */
 void TaM_mainloop_direct(GLFWwindow *ptrW);
+
+/***********************
+	TaM_drawer_direct()
+	* Directly draws the game elements
+	* Replace with: to be determined
+************************/
+void TaM_draw_direct(GLFWwindow *ptrW, TaM_Drawable *drawThis);
+
+/***********************
+	TaM_drawTheseus_direct
+	* Pushes current matrix and directly sets up the matrix for Theseus
+	* Replace with: to be determined
+************************/
+void TaM_prepTheseus_direct(TaM_Map *curMap, TaM_Theseus *curThe);
+
+#endif

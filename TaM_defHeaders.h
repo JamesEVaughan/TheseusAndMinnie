@@ -11,6 +11,9 @@
 
 // System files
 /********		ALL CORE FILES ARE INCLUDED HERE!!!	***********/
+#define _USE_MATH_DEFINES
+#include <cmath>
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <string>

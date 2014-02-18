@@ -51,11 +51,15 @@ public:
 
 	// TaM_Drawable functions
 	virtual void draw();
-	virtual TaM_IntVector getSize();
 
 	// Debugging
 	void writeToConsole();
 
+	// Accessors for the key spaces
+	TaM_IntVector getTheseus();
+	TaM_IntVector getMinnie();
+	TaM_IntVector getTheEnd();
+	TaM_IntVector getSize();
 };
 
 #endif
