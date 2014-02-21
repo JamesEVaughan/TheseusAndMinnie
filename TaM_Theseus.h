@@ -6,9 +6,9 @@
 #define TAM_THESEUS
 
 #include "TaM_defHeaders.h"
-#include "TaM_Drawable.h"
+#include "TaM_Actor.h"
 
-class TaM_Theseus : public TaM_Drawable {
+class TaM_Theseus : public TaM_Actor {
 private:
 	TaM_IntVector *pos; // Grid position on the map
 	GLfloat marker[TAM_MARKER_VERTS][2];  // An array of vertices
@@ -23,11 +23,13 @@ public:
 
 	void init(TaM_IntVector start);
 
-	// Draw specific functions
-	virtual void draw();
 
-	// Accessors
-	TaM_IntVector getLoc() {return *pos;}
+	// Actor functions
+	virtual TaM_IntVector getLoc() {return *pos;}
+	virtual void move(unsigned char dir);
+
+	// Drawable functions
+	virtual void draw();
 };
 
 #endif

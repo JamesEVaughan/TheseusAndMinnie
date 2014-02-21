@@ -3,8 +3,13 @@
 #include "TaM_defHeaders.h"
 #include "TaM_main.h"
 
+
+// Debugging
 #include "TaM_Map.h"
 #include "TaM_Theseus.h"
+#include "TaM_ActorDrawList.h"
+#include "TaM_GameDisplay.h"
+#include <ctime>
 
 using namespace std;
 
@@ -29,6 +34,9 @@ int main(int argc, char *args[]) {
 	// Test of TaM_Map
 	TaM_Map testaroni;
 	TaM_Theseus player;
+	TaM_IntVector coord(40, 40);
+	TaM_IntVector dims(560, 560);
+	TaM_GameDisplay disp(coord, dims);
 	int err = testaroni.init("Maps\\Map1.tam");
 	if (err) {
 		cout << "Error code: " << err << " produced.\n";
@@ -36,12 +44,34 @@ int main(int argc, char *args[]) {
 	else {
 		// Initialize Theseus
 		player.init(testaroni.getTheseus());
+
+		// Load the game elements
+		disp.addMap(&testaroni);
+		disp.addActor(&player);
+		
 		// Let's see what it looks like...
-		TaM_draw_direct(theWnd, &testaroni);
-		// Let's test the matrices...
-		TaM_prepTheseus_direct(&testaroni, &player);
-		player.draw();
-		glPopMatrix();
+		disp.redrawDisplay();
+
+		glfwSwapBuffers(theWnd);
+	}
+
+	// Let's test the moving stuff
+	for (int i = 0; i < 7; i++) {
+		double wait = 3.0; // Wait 3 seconds
+		clock_t beg = clock();
+
+		while(wait > (clock() - beg)/CLOCKS_PER_SEC) {
+			// Wait
+		}
+
+		if (i % 2) {
+			player.move(TAM_MOVE_NORTH);
+		}
+		else {
+			player.move(TAM_MOVE_SOUTH);
+		}
+
+		disp.redrawDisplay();
 		glfwSwapBuffers(theWnd);
 	}
 	
@@ -158,11 +188,13 @@ void TaM_prepTheseus_direct(TaM_Map *curMap, TaM_Theseus *curThe) {
 	mapSqX += TAM_SQUARE_SIZE/2;
 	mapSqY -= TAM_SQUARE_SIZE/2;
 
-	mapSqX += curThe->getLoc().get1() * TAM_SQUARE_SIZE;
-	mapSqY -= curThe->getLoc().get2() * TAM_SQUARE_SIZE;
-
 	glTranslatef(mapSqX, mapSqY, 0);
 	
 	// Scale him to size
-	glScalef(1.f/TAM_GRID_SIZE, 1.f/TAM_GRID_SIZE, 1);
+	glScalef(TAM_SQUARE_SIZE, TAM_SQUARE_SIZE, 1);
+
+	mapSqX = (float)curThe->getLoc().get1();
+	mapSqY = (float)-curThe->getLoc().get2();
+
+	glTranslatef(mapSqX, mapSqY, 0.f);
 }

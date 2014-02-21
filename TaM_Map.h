@@ -18,6 +18,7 @@ using namespace std;
 class TaM_Map : public TaM_Drawable {
 private:
 	TaM_IntVector *sizeSq;	// Size of the map in spaces
+	TaM_FloatVector *topLeft;  // Map-space coordinates for the top-left corner 
 	char *spaces;			// Only use SPC_ functs to interact! Explanation for each space
 	TaM_LineList *wallHelper;
 	string name;
@@ -60,6 +61,7 @@ public:
 	TaM_IntVector getMinnie();
 	TaM_IntVector getTheEnd();
 	TaM_IntVector getSize();
+	TaM_FloatVector getTopLeft();
 };
 
 #endif

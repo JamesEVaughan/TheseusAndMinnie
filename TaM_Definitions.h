@@ -26,11 +26,13 @@
 /***********************
 	Movement
 ************************/
-#define GO_STAY		0	// Don't move this round
-#define	GO_NORTH	1
-#define	GO_EAST		1 << 1
-#define	GO_SOUTH	1 << 2
-#define GO_WEST		1 << 3
+#define TAM_MOVE_STAY	0	// Don't move this round
+#define	TAM_MOVE_NORTH	1
+#define	TAM_MOVE_EAST	1 << 1
+#define	TAM_MOVE_SOUTH	1 << 2
+#define TAM_MOVE_WEST	1 << 3
+
+#define TAM_MOVE_MASK	TAM_MOVE_NORTH | TAM_MOVE_EAST | TAM_MOVE_SOUTH | TAM_MOVE_WEST
 
 /***********************
 	File system
@@ -48,6 +50,7 @@
 #define	TAM_COLOR_THE	0.f, 0.f, 0.8f
 #define	TAM_COLOR_MIN	0.75f, 0.5f, 0.5f	// Pink?
 #define TAM_COLOR_END	0.9f, 0.f, 0.f
+#define TAM_COLOR_BG	9.f, 9.f, 9.f	// Black
 
 /***********************
 	Actor aids

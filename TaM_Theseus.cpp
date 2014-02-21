@@ -19,12 +19,13 @@ void TaM_Theseus::init(TaM_IntVector start) {
 }
 
 void TaM_Theseus::buildMarker() {
-	// Builds a set of vertices for a circle
+	// Builds a set of vertices for the marker
 	GLfloat angleStep = (float) (2.f * M_PI / TAM_MARKER_VERTS);
+	float r = 0.45f;  // Radius for the circle
 
 	for (int i = 0; i < TAM_MARKER_VERTS; i++) {
-		marker[i][0] = cos(angleStep * i);
-		marker[i][1] = sin(angleStep * i);
+		marker[i][0] = cos(angleStep * i) * r;
+		marker[i][1] = sin(angleStep * i) * r;
 	}
 }
 
@@ -42,4 +43,25 @@ void TaM_Theseus::draw() {
 		// Add the first one back in to complete the circle
 		glVertex2fv(marker[0]);
 	glEnd();
+}
+
+void TaM_Theseus::move(unsigned char dir) {
+	// Sanity check
+	dir &= TAM_MOVE_MASK;
+	if (dir) {
+		switch (dir) {
+		case TAM_MOVE_NORTH:
+			pos->set2(pos->get2()-1);
+			return;
+		case TAM_MOVE_SOUTH:
+			pos->set2(pos->get2()+1);
+			return;
+		case TAM_MOVE_WEST:
+			pos->set1(pos->get1()+1);
+			return;
+		case TAM_MOVE_EAST:
+			pos->set1(pos->get1()-1);
+			return;
+		}
+	}
 }

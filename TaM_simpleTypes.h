@@ -30,4 +30,23 @@ public:
 	void set2(int new2) {val2 = new2;}
 };
 
+class TaM_FloatVector {
+private:
+	float val1;
+	float val2;
+
+public:
+	// Constructor
+	TaM_FloatVector(float one, float two);
+	TaM_FloatVector();
+
+	// Accessors
+	float get1() {return val1;}
+	float get2() {return val2;}
+
+	// Mutators
+	void set1(float new1) {val1 = new1;}
+	void set2(float new2) {val2 = new2;}
+};
+
 #endif

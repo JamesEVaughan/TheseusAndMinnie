@@ -22,6 +22,7 @@ TaM_Map::~TaM_Map() {
 	delete theEnd;
 	delete sizeSq;
 	delete wallHelper;
+	delete topLeft;
 }
 
 int TaM_Map::init(string mapName) {
@@ -37,7 +38,11 @@ int TaM_Map::init(string mapName) {
 	if (errCode = findPoints()) {
 		return errCode;
 	}
-
+	
+	// Find the top left corner
+	int unusedSqX = (sizeSq->get1()+1) / 2; // Number of squares west of x-axis
+	int unusedSqY = (sizeSq->get2()+1) / 2; // Number of squares north of y-axis
+	topLeft = new TaM_FloatVector(-(unusedSqX * TAM_SQUARE_SIZE), unusedSqY * TAM_SQUARE_SIZE);
 	// Build the lines
 	buildLines();
 
@@ -160,8 +165,9 @@ void TaM_Map::buildLines() {
 
 	// Set up the offsets in both directions to center the map
 	// NOTE: With an odd number of squares, the extra square will be on the right and below, respectively
-	GLfloat xOffset = ((TAM_GRID_SIZE - sizeSq->get1()) / 2.f) * TAM_SQUARE_SIZE - 1;
-	GLfloat yOffset = 1 - (((TAM_GRID_SIZE - sizeSq->get2()) / 2.f) * TAM_SQUARE_SIZE);
+	// Previously, offsets were used, now the origin is stored
+	GLfloat xOffset = topLeft->get1();
+	GLfloat yOffset = topLeft->get2();
 
 	/*********
 		The algorithm evaluates each value in spaces to find the horizontal and 
@@ -333,4 +339,8 @@ TaM_IntVector TaM_Map::getTheEnd() {
 
 TaM_IntVector TaM_Map::getSize() {
 	return *sizeSq;
+}
+
+TaM_FloatVector TaM_Map::getTopLeft() {
+	return *topLeft;
 }

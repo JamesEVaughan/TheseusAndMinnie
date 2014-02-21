@@ -18,9 +18,6 @@
     <ClCompile Include="TaM_main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="TaM_mainDisplay.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="TaM_simpleTypes.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -33,15 +30,15 @@
     <ClCompile Include="TaM_Theseus.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="TaM_DrawList.cpp">
+    <ClCompile Include="TaM_ActorDrawList.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TaM_GameDisplay.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TaM_defHeaders.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TaM_mainDisplay.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="TaM_main.h">
@@ -65,7 +62,16 @@
     <ClInclude Include="TaM_Theseus.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="TaM_DrawList.h">
+    <ClInclude Include="TaM_Actor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TaM_ActorDrawList.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TaM_Window.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TaM_GameDisplay.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
