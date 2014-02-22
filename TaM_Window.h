@@ -11,12 +11,38 @@
 #include "TaM_Definitions.h"
 
 // All the display classes
-#include "TaM_ActorDrawList.h"
+#include "TaM_GameDisplay.h"
 
 class TaM_Window {
 private:
-	GLFWwindow *pMainWnd;
+	GLFWwindow *mainWnd;  // Pointer to the application's window
+	TaM_GameDisplay *disp;  // The viewer to the game world
 
+	/* TO DO:
+		* Menu system for entry & exit
+		* Informational displays
+	*/
+
+	TaM_IntVector wndSize;  // Size, in pixels, of application window
+
+	// Helper functions
+public:
+	// Constructors/destructors
+	TaM_Window();
+	~TaM_Window();
+
+	// Initializer, returns error code
+	int init(TaM_IntVector sz, string name);
+
+	// Refreshes entire window
+	void refresh();
+
+	// disp accessors
+	void addMap(TaM_Map *m) {disp->addMap(m);}
+	void addActor(TaM_Actor *act) {disp->addActor(act);}
+
+	// Debugging, returns mainWnd
+	GLFWwindow *getWnd() {return mainWnd;}
 
 };
 

@@ -17,7 +17,7 @@ private:
 
 public:
 	// Constructors/destructors
-	TaM_ActorDrawList() {head = tail = NULL;}
+	TaM_ActorDrawList() {head = NULL; tail = NULL;}
 	~TaM_ActorDrawList();
 
 	// Adds a Actor object to the list

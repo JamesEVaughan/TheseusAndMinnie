@@ -53,9 +53,18 @@
 #define TAM_COLOR_BG	9.f, 9.f, 9.f	// Black
 
 /***********************
-	Actor aids
+	Actor
 ************************/
 #define	TAM_MARKER_VERTS	20
+
+/***********************
+	Windows
+************************/
+#define TAM_WINDOW_NAME	"Theseus & Minnie"
+#define	TAM_WINDOW_X	640
+#define TAM_WINDOW_Y	640
+
+#define TAM_DISP_OFF	40	// Border around the game viewer
 
 /***********************
 	Error codes
@@ -66,5 +75,7 @@
 #define	ERR_MAP_OPEN	3	// Map file not openable
 #define ERR_MAP_BAD		4	// Bad map file
 #define ERR_MAP_EOF		5	// Unexpected end of file
+#define ERR_WND			6	// General window error
+#define ERR_WND_OPEN	7	// Window didn't open
 
 #endif

@@ -63,17 +63,20 @@
   <ItemGroup>
     <ClCompile Include="TaM_ActorDrawList.cpp" />
     <ClCompile Include="TaM_GameDisplay.cpp" />
+    <ClCompile Include="TaM_GameRules.cpp" />
     <ClCompile Include="TaM_LineList.cpp" />
     <ClCompile Include="TaM_main.cpp" />
     <ClCompile Include="TaM_Map.cpp" />
     <ClCompile Include="TaM_simpleTypes.cpp" />
     <ClCompile Include="TaM_Theseus.cpp" />
+    <ClCompile Include="TaM_Window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TaM_Actor.h" />
     <ClInclude Include="TaM_defHeaders.h" />
     <ClInclude Include="TaM_Definitions.h" />
     <ClInclude Include="TaM_GameDisplay.h" />
+    <ClInclude Include="TaM_GameRules.h" />
     <ClInclude Include="TaM_Window.h" />
     <ClInclude Include="TaM_Drawable.h" />
     <ClInclude Include="TaM_ActorDrawList.h" />

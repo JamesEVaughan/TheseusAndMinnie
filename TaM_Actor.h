@@ -12,7 +12,7 @@
 class TaM_Actor : public TaM_Drawable {
 public:
 	virtual TaM_IntVector getLoc() = 0; // Returns location on map as an IntVector
-	virtual void move(unsigned char dir) = 0; // Moves actor one space in dir
+	virtual void move(char dir) = 0; // Moves actor one space in dir
 };
 
 #endif

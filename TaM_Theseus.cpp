@@ -45,7 +45,7 @@ void TaM_Theseus::draw() {
 	glEnd();
 }
 
-void TaM_Theseus::move(unsigned char dir) {
+void TaM_Theseus::move(char dir) {
 	// Sanity check
 	dir &= TAM_MOVE_MASK;
 	if (dir) {

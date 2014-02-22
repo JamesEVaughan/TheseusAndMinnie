@@ -4,17 +4,17 @@
 #include "TaM_main.h"
 
 
+
 // Debugging
 #include "TaM_Map.h"
 #include "TaM_Theseus.h"
 #include "TaM_ActorDrawList.h"
 #include "TaM_GameDisplay.h"
+#include "TaM_Window.h"
+
 #include <ctime>
 
 using namespace std;
-
-#define	TaM_WINDOW_X	640
-#define TaM_WINDOW_Y	640
 
 
 int main(int argc, char *args[]) {
@@ -25,68 +25,59 @@ int main(int argc, char *args[]) {
 		return 0;
 	}
 
-	GLFWwindow *theWnd = TaM_viewInit_direct(); 
-	if (!theWnd) {
-		// Just quietly crash, we can debug for faults
+	TaM_Window wnd;
+	int err = wnd.init(TaM_IntVector(640, 640), TAM_WINDOW_NAME);
+	if (err) {
+		// Fuck a duck!
+		cout << "Errorcode: " << err << " generated.\nBye!";
+		system("PAUSE");
 		return 0;
 	}
+
 
 	// Test of TaM_Map
 	TaM_Map testaroni;
 	TaM_Theseus player;
 	TaM_IntVector coord(40, 40);
 	TaM_IntVector dims(560, 560);
-	TaM_GameDisplay disp(coord, dims);
-	int err = testaroni.init("Maps\\Map1.tam");
+	err = testaroni.init("Maps\\Map1.tam");
 	if (err) {
 		cout << "Error code: " << err << " produced.\n";
 	}
-	else {
-		// Initialize Theseus
-		player.init(testaroni.getTheseus());
+	// Initialize Theseus
+	player.init(testaroni.getTheseus());
 
-		// Load the game elements
-		disp.addMap(&testaroni);
-		disp.addActor(&player);
+	// Load the game elements
+	wnd.addMap(&testaroni);
+	wnd.addActor(&player);
 		
-		// Let's see what it looks like...
-		disp.redrawDisplay();
+	// Let's see what it looks like...
 
-		glfwSwapBuffers(theWnd);
-	}
-
-	// Let's test the moving stuff
-	for (int i = 0; i < 7; i++) {
-		double wait = 3.0; // Wait 3 seconds
-		clock_t beg = clock();
-
-		while(wait > (clock() - beg)/CLOCKS_PER_SEC) {
-			// Wait
+	GLFWwindow *tempWnd = wnd.getWnd();
+	
+	// Setup callbacks:
+	glfwSetKeyCallback(tempWnd, TaM_kbCallback_direct);
+	while (true) {
+	wnd.refresh();
+		glfwPollEvents();
+		if (glfwWindowShouldClose(tempWnd)) {
+			break;
 		}
-
-		if (i % 2) {
-			player.move(TAM_MOVE_NORTH);
-		}
-		else {
-			player.move(TAM_MOVE_SOUTH);
-		}
-
-		disp.redrawDisplay();
-		glfwSwapBuffers(theWnd);
 	}
 	
-	TaM_mainloop_direct(theWnd);
+	//TaM_mainloop_direct(theWnd);
 	
 
 	// Again, the following section will be pruned of the _direct functions
-	TaM_viewDestroy_direct(theWnd);
+	//TaM_viewDestroy_direct(theWnd);
+	wnd.~TaM_Window();
 
 	glfwTerminate();
 	return 0;
 }
 
 GLFWwindow *TaM_viewInit_direct() {
-	GLFWwindow *ptrW = glfwCreateWindow(TaM_WINDOW_X, TaM_WINDOW_Y, "Theseus and the Minotaur - Tempy", NULL, NULL);
+	GLFWwindow *ptrW = glfwCreateWindow(TAM_WINDOW_X, TAM_WINDOW_Y, "Theseus and the Minotaur - Tempy", NULL, NULL);
 	if (!ptrW) {
 		return NULL;
 	}

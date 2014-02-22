@@ -344,3 +344,23 @@ TaM_IntVector TaM_Map::getSize() {
 TaM_FloatVector TaM_Map::getTopLeft() {
 	return *topLeft;
 }
+
+char TaM_Map::getSpaceInfo(TaM_IntVector coord) {
+	// return getSpace()
+	return SPC_getSpace(coord.get1(), coord.get2());
+}
+
+char TaM_Map::SPC_getSpace(int x, int y) {
+	// Make sure it is inside the map
+	if (x < 0 || y < 0) {
+		// Negatives aren't allowed
+		return (char) (NO_ACCESS);
+	}
+	if (x > sizeSq->get1() || y > sizeSq->get2()) {
+		// Outside of the map
+		return (char) (NO_ACCESS);
+	}
+
+	// Ok, it's valid, return the record
+	return spaces[x + (y * sizeSq->get1())];
+}

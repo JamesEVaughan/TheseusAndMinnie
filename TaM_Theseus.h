@@ -26,7 +26,7 @@ public:
 
 	// Actor functions
 	virtual TaM_IntVector getLoc() {return *pos;}
-	virtual void move(unsigned char dir);
+	virtual void move(char dir);
 
 	// Drawable functions
 	virtual void draw();

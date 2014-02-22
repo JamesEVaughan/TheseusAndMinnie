@@ -42,11 +42,13 @@ void TaM_ActorDrawList::addActor(TaM_Actor *act, TaM_FloatVector tlCoord) {
 	// ...and retain the homogeneous value
 	tempy->trans[15] = 1.f;
 
-	if (!head) {
-		head = tail = tempy;
+	if (head == NULL) {
+		head = tempy;
+		tail = head;
 	}
 	else {
 		tail->next = tempy;
+		tail = tempy;
 	}
 }
 

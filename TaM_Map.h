@@ -30,7 +30,7 @@ private:
 
 	// Helper functions for *spaces so I don't fuck it up
 	void SPC_create(TaM_IntVector dim) {spaces = new char[dim.get1() * dim.get2()];}
-	char SPC_getSpace(int x, int y) {return spaces[(x + y * sizeSq->get2())];}
+	char SPC_getSpace(int x, int y);
 	void SPC_setSpace(int x, int y, char val) {spaces[x + y * sizeSq->get1()] = val;}
 	void SPC_delete() {delete[] spaces;}
 
@@ -56,12 +56,13 @@ public:
 	// Debugging
 	void writeToConsole();
 
-	// Accessors for the key spaces
-	TaM_IntVector getTheseus();
-	TaM_IntVector getMinnie();
-	TaM_IntVector getTheEnd();
-	TaM_IntVector getSize();
-	TaM_FloatVector getTopLeft();
+	// Accessors
+	TaM_IntVector getTheseus();  // Start location: Theseus
+	TaM_IntVector getMinnie();  // Start location: Minnie
+	TaM_IntVector getTheEnd();  // Location of the ext
+	TaM_IntVector getSize();  // Size of the map
+	TaM_FloatVector getTopLeft(); // Location of top-left corner in map-space
+	char getSpaceInfo(TaM_IntVector coord);  // Info for space at coord
 };
 
 #endif
