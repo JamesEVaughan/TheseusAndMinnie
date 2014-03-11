@@ -20,9 +20,17 @@ private:
 	TaM_GameRules *curRules;
 	TaM_Window *curWnd;
 
+	// Needed throughout
+	GLFWwindow *glfwWndPtr;
+
 	int inputKey;
+	clock_t nextAction;
 
 	// Helper functions
+	// Return true only if clock() > nextAction
+	bool canAct();
+	// Sets nextAction to a new value after a completed action
+	void setNextAction();
 
 public:
 	// Constructor/destructors
@@ -32,14 +40,14 @@ public:
 	// Initializer, returns error codes
 	int init(string map);
 
-	// Keyboard handler, returns error code
-	int kbInput(int key);
+	// Keyboard handler
+	void kbInput(int key);
 
 	// The main loop, return error code
 	int mainLoop();
 
 	// Window accessor, returns pointer for callbacks, etc
-	GLFWwindow *getWnd();
+	GLFWwindow *getWnd() {return glfwWndPtr;} 
 };
 
 #endif

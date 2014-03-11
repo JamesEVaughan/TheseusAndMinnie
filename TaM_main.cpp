@@ -22,6 +22,7 @@ int main(int argc, char *args[]) {
 	// Initialize library
 	if (!glfwInit()) {
 		// Well that sucks, bye
+		TaM_error(ERR_GLFW);
 		return 0;
 	}
 
@@ -31,27 +32,54 @@ int main(int argc, char *args[]) {
 	err = ctrl.init((string)(MAP_DIR) + "Map1.tam");
 	if (err) {
 		// This is a non-recoverable error
-		// Unload the library
-		glfwTerminate();
+		TaM_error(err);
 
-		cout << "Error: " << err << " occurred." << endl;
-		// Let the user see it then bug out
-		system("PAUSE");
 		return 0; // No reason to freak out the system over this crappy little game
-	}
+	} 
 
 	GLFWwindow *wnd = ctrl.getWnd();
 	// First and foremost, link this instance of GameRules with the window
 	// Establish callbacks like:
 	// Keyboard!
+	if (glfwSetKeyCallback(wnd, TaM_kbCallback)) {
+		// Uh oh
+		TaM_error(ERR_GLFW);
 
+		return 0;
+	}
 
 	// Let's see what it looks like...
-	system("PAUSE");
+	ctrl.mainLoop();
 
 
 	glfwTerminate();
 	return 0;
+}
+
+// Helper function implementation!
+// Error function
+void TaM_error(int errCode) {
+	// Unload the GLFW library
+	glfwTerminate();
+
+	cout << endl << endl;
+	cout << "Error code: " << errCode << " occurred." << endl;
+	cout << "Theseus and Minnie will now end." << endl;
+	system("PAUSE");
+}
+
+// Keyboard callback
+void TaM_kbCallback(GLFWwindow *wnd, int key, int sCode, int act, int mod) {
+	TaM_GameManager *ctrl = static_cast<TaM_GameManager *>(glfwGetWindowUserPointer(wnd));
+	if (!ctrl) {
+		// Not good, just break for now...
+		return;
+	}
+
+	// We only care about keys that have been pressed
+	if (act == GLFW_PRESS) {
+		ctrl->kbInput(key);
+	}
 }
 
 GLFWwindow *TaM_viewInit_direct() {

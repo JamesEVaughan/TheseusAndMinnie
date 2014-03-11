@@ -18,6 +18,12 @@ private:
 
 	int turn;
 
+	// Helpers
+	void setTurn();
+
+	// Checks all game ending conditions, returns true if one has been achieved
+	bool gameOver();
+
 public:
 	// Constructors/destructors
 	TaM_GameRules();

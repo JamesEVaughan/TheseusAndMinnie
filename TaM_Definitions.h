@@ -77,6 +77,7 @@
 #define ERR_MAP_EOF		5	// Unexpected end of file
 #define ERR_WND			6	// General window error
 #define ERR_WND_OPEN	7	// Window didn't open
+#define ERR_GLFW		8	// General GLFW error
 
 /***********************
 	GLFW Key Codes

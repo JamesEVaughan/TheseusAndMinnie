@@ -57,10 +57,10 @@ void TaM_Theseus::move(char dir) {
 			pos->set2(pos->get2()+1);
 			return;
 		case TAM_MOVE_WEST:
-			pos->set1(pos->get1()+1);
+			pos->set1(pos->get1()-1);
 			return;
 		case TAM_MOVE_EAST:
-			pos->set1(pos->get1()-1);
+			pos->set1(pos->get1()+1);
 			return;
 		}
 	}

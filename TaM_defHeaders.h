@@ -19,6 +19,7 @@
 #include <string>
 #include <fstream>
 #include <iostream>
+#include <ctime>
 
 // Super common TaM files
 #include "TaM_Definitions.h"

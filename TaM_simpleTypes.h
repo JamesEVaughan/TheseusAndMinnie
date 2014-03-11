@@ -28,6 +28,9 @@ public:
 	// Mutators
 	void set1(int new1) {val1 = new1;}
 	void set2(int new2) {val2 = new2;}
+
+	// Returns true if this == oth
+	bool equalTo(TaM_IntVector *oth);
 };
 
 class TaM_FloatVector {

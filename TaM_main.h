@@ -8,7 +8,22 @@
 #include "TaM_Map.h"
 #include "TaM_Theseus.h"
 
-// Helper functions
+/***********************
+	TaM_Error
+	Called in case of a nonrecoverable error. Destroys the GLFW instance and
+	output an error message to the command line. Calls a pause for viewing.
+
+	Should be called directly from main(). Program should immediately exit after.
+************************/
+void TaM_error(int errCode);
+
+/***********************
+	TaM_kbCallback
+	Mainly trims and prepares keyboard input for processing by GameManager
+************************/
+void TaM_kbCallback(GLFWwindow *wnd, int key, int sCode, int act, int mod);
+
+
 
 
 /***** TaM_viewInit_direct

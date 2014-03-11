@@ -10,6 +10,7 @@ TaM_GameManager::TaM_GameManager() {
 	curWnd = new TaM_Window();
 
 	inputKey = 0;
+	nextAction = clock();
 }
 
 TaM_GameManager::~TaM_GameManager() {
@@ -32,14 +33,14 @@ int TaM_GameManager::init(string map) {
 		// Issue with the window, unlikely to be recoverable, kick it upstream
 		return errCode;
 	}
-	GLFWwindow *actWnd = curWnd->getWnd(); // Pointer to the actual window
+	glfwWndPtr = curWnd->getWnd(); // Pointer to the actual window
 
 	// Link this instance with the window for the API callbacks
-	if (glfwGetWindowUserPointer(actWnd)) {
+	if (glfwGetWindowUserPointer(glfwWndPtr)) {
 		// Yeah, this shouldn't happen, return a general error
 		return ERR_GEN;
 	}
-	glfwSetWindowUserPointer(actWnd, static_cast<void *>(this));
+	glfwSetWindowUserPointer(glfwWndPtr, static_cast<void *>(this));
 
 	// Everything's ok, load the map & characters to the viewer
 	curWnd->addMap(curRules->getMap());
@@ -52,20 +53,87 @@ int TaM_GameManager::init(string map) {
 }
 
 // Interprets keyboard input 
-int TaM_GameManager::kbInput(int key) {
-	// Needs to be completed...
+void TaM_GameManager::kbInput(int key) {
+	char act = 0;
 
-	return ALL_CLEAR;
+	// The player can always exit, restart, or change the map
+	switch (key) {
+	case TAM_EXIT:
+		glfwSetWindowShouldClose(glfwWndPtr, GL_TRUE);
+		act = -1;
+		break;
+	case TAM_RESTART:
+		curRules->restart();
+		act = -1;
+		break;
+	case TAM_NEW_MAP:
+		// TO DO: Implement map choosing
+		// For now, treat it like a restart
+		curRules->restart();
+		act = -1;
+		break;
+	}
+	// First, is it the players turn?
+	if (curRules->curTurn() != TAM_TURN_THE) {
+		// Flush input
+		return;
+	}
+
+
+	// Debugging, output the commands given...
+	if (act >= 0) {
+		switch(key) {
+		case TAM_UP:
+			act = TAM_MOVE_NORTH;
+			break;
+		case TAM_RIGHT:
+			act = TAM_MOVE_EAST;
+			break;
+		case TAM_DOWN:
+			act = TAM_MOVE_SOUTH;
+			break;
+		case TAM_LEFT:
+			act = TAM_MOVE_WEST;
+			break;
+		case TAM_STAY:
+			act = TAM_MOVE_STAY;
+			break;
+		}
+	}
+
+	// If we're here, that means it was a move for Theseus!
+	// Try the move!
+	if (curRules->moveThe(act)) {
+		// Yeah, he moved!
+	}
+
+	else {
+		// He didn't move? D: Tell the player
+	}
+
+	curWnd->refresh();
 }
 
 // The main application loop, returns error code depending on exit status
 int TaM_GameManager::mainLoop() {
-	// Needs to be completed...
+	// Dirty hack
+	while (!glfwWindowShouldClose(glfwWndPtr)) {
+		glfwPollEvents();
+	}
 
 	return ALL_CLEAR;
 }
 
-// Returns a pointer to the application window, for establishing callbacks
-GLFWwindow *TaM_GameManager::getWnd() {
-	return curWnd->getWnd();
+// Helpers
+bool TaM_GameManager::canAct() {
+	if (nextAction < clock()) {
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+
+void TaM_GameManager::setNextAction() {
+	nextAction = clock() + (clock_t)(CLOCKS_PER_SEC * 0.5f);
 }

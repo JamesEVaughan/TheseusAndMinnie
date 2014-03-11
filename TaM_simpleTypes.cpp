@@ -17,6 +17,16 @@ TaM_IntVector::TaM_IntVector() {
 	val2 = 0;
 }
 
+bool TaM_IntVector::equalTo(TaM_IntVector *oth) {
+	if ((this->val1 == oth->val1) && (this->val2 == oth->val2)) {
+		return true;
+	}
+
+	else {
+		return false;
+	}
+}
+
 /****************************
 	TaM_FloatVector
 *****************************/
