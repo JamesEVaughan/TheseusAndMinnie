@@ -63,6 +63,7 @@
   <ItemGroup>
     <ClCompile Include="TaM_ActorDrawList.cpp" />
     <ClCompile Include="TaM_GameDisplay.cpp" />
+    <ClCompile Include="TaM_GameManager.cpp" />
     <ClCompile Include="TaM_GameRules.cpp" />
     <ClCompile Include="TaM_LineList.cpp" />
     <ClCompile Include="TaM_main.cpp" />
@@ -76,6 +77,7 @@
     <ClInclude Include="TaM_defHeaders.h" />
     <ClInclude Include="TaM_Definitions.h" />
     <ClInclude Include="TaM_GameDisplay.h" />
+    <ClInclude Include="TaM_GameManager.h" />
     <ClInclude Include="TaM_GameRules.h" />
     <ClInclude Include="TaM_Window.h" />
     <ClInclude Include="TaM_Drawable.h" />

@@ -8,6 +8,8 @@
 #include "TaM_Map.h"
 #include "TaM_Theseus.h"
 
+// Helper functions
+
 
 /***** TaM_viewInit_direct
 	* Initializes the view window for the entire app.

@@ -2,7 +2,7 @@
 
 #include "TaM_defHeaders.h"
 #include "TaM_main.h"
-
+#include "TaM_GameManager.h"
 
 
 // Debugging
@@ -25,52 +25,30 @@ int main(int argc, char *args[]) {
 		return 0;
 	}
 
-	TaM_Window wnd;
-	int err = wnd.init(TaM_IntVector(640, 640), TAM_WINDOW_NAME);
+	int err = ALL_CLEAR;
+	TaM_GameManager ctrl;
+
+	err = ctrl.init((string)(MAP_DIR) + "Map1.tam");
 	if (err) {
-		// Fuck a duck!
-		cout << "Errorcode: " << err << " generated.\nBye!";
+		// This is a non-recoverable error
+		// Unload the library
+		glfwTerminate();
+
+		cout << "Error: " << err << " occurred." << endl;
+		// Let the user see it then bug out
 		system("PAUSE");
-		return 0;
+		return 0; // No reason to freak out the system over this crappy little game
 	}
 
+	GLFWwindow *wnd = ctrl.getWnd();
+	// First and foremost, link this instance of GameRules with the window
+	// Establish callbacks like:
+	// Keyboard!
 
-	// Test of TaM_Map
-	TaM_Map testaroni;
-	TaM_Theseus player;
-	TaM_IntVector coord(40, 40);
-	TaM_IntVector dims(560, 560);
-	err = testaroni.init("Maps\\Map1.tam");
-	if (err) {
-		cout << "Error code: " << err << " produced.\n";
-	}
-	// Initialize Theseus
-	player.init(testaroni.getTheseus());
 
-	// Load the game elements
-	wnd.addMap(&testaroni);
-	wnd.addActor(&player);
-		
 	// Let's see what it looks like...
+	system("PAUSE");
 
-	GLFWwindow *tempWnd = wnd.getWnd();
-	
-	// Setup callbacks:
-	glfwSetKeyCallback(tempWnd, TaM_kbCallback_direct);
-	while (true) {
-	wnd.refresh();
-		glfwPollEvents();
-		if (glfwWindowShouldClose(tempWnd)) {
-			break;
-		}
-	}
-	
-	//TaM_mainloop_direct(theWnd);
-	
-
-	// Again, the following section will be pruned of the _direct functions
-	//TaM_viewDestroy_direct(theWnd);
-	wnd.~TaM_Window();
 
 	glfwTerminate();
 	return 0;

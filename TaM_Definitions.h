@@ -78,4 +78,27 @@
 #define ERR_WND			6	// General window error
 #define ERR_WND_OPEN	7	// Window didn't open
 
+/***********************
+	GLFW Key Codes
+************************/
+// Player controls
+#define TAM_UP		GLFW_KEY_UP
+#define TAM_DOWN	GLFW_KEY_DOWN
+#define TAM_LEFT	GLFW_KEY_LEFT
+#define TAM_RIGHT	GLFW_KEY_RIGHT
+#define TAM_STAY	GLFW_KEY_S
+
+// Options
+#define TAM_EXIT	GLFW_KEY_ESCAPE
+#define TAM_RESTART	GLFW_KEY_R
+#define TAM_NEW_MAP	GLFW_KEY_N
+
+/***********************
+	GameRules
+************************/
+// Turns
+#define TAM_TURN_END	0
+#define TAM_TURN_THE	1
+#define TAM_TURN_MIN	2
+
 #endif

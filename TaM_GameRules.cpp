@@ -6,7 +6,7 @@
 TaM_GameRules::TaM_GameRules() {
 	map = new TaM_Map();
 	the = new TaM_Theseus();
-	turn = GAME_END;
+	turn = TAM_TURN_END;
 }
 
 TaM_GameRules::~TaM_GameRules() {
@@ -29,12 +29,11 @@ int TaM_GameRules::init(string mapName) {
 	// Setup Minnie when that's done...
 
 	// Theseus is always first
-	turn = THESEUS;
+	turn = TAM_TURN_THE;
 
 	return ALL_CLEAR;
 }
 
-// TO DO:
 bool TaM_GameRules::moveThe(char dir) {
 	char curPos = map->getSpaceInfo(the->getLoc());
 

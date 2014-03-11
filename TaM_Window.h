@@ -41,7 +41,7 @@ public:
 	void addMap(TaM_Map *m) {disp->addMap(m);}
 	void addActor(TaM_Actor *act) {disp->addActor(act);}
 
-	// Debugging, returns mainWnd
+	// Returns the active window
 	GLFWwindow *getWnd() {return mainWnd;}
 
 };

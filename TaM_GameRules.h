@@ -16,7 +16,7 @@ private:
 	TaM_Map *map;  // Current map
 	TaM_Theseus *the; // Theseus, the player character
 
-	enum {THESEUS, MINNIE, GAME_END} turn;
+	int turn;
 
 public:
 	// Constructors/destructors
@@ -32,6 +32,9 @@ public:
 
 	// Map
 	void restart();  // Restarts game using the same map
+
+	// Returns current turn
+	int curTurn() {return turn;}
 
 	// Accessors, pass map, etc. for view components
 	TaM_Map *getMap() {return map;}

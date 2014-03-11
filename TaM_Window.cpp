@@ -6,7 +6,7 @@
 
 TaM_Window::TaM_Window() {
 	mainWnd = NULL;
-	//disp = NULL;
+	disp = NULL;
 }
 
 TaM_Window::~TaM_Window() {
@@ -14,7 +14,7 @@ TaM_Window::~TaM_Window() {
 	glfwDestroyWindow(mainWnd);
 
 	// Delete disp
-	//delete disp;
+	delete disp;
 }
 
 int TaM_Window::init(TaM_IntVector sz, string name) {

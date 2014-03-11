@@ -4,7 +4,7 @@
 
 // GLFW is included first
 #ifndef TAM_GLFW
-#define TaM_GLFW	// Flags glfw.h as having been included for files that need to directly include glfw
+#define TAM_GLFW	// Flags glfw.h as having been included for files that need to directly include glfw
 #include <GLFW\glfw3.h>
 #endif
 
