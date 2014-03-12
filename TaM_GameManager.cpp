@@ -45,6 +45,7 @@ int TaM_GameManager::init(string map) {
 	// Everything's ok, load the map & characters to the viewer
 	curWnd->addMap(curRules->getMap());
 	curWnd->addActor(curRules->getTheseus());
+	curWnd->addActor(curRules->getMinnie());
 
 	// Now that everything's loaded, refresh the window
 	curWnd->refresh();
@@ -54,71 +55,112 @@ int TaM_GameManager::init(string map) {
 
 // Interprets keyboard input 
 void TaM_GameManager::kbInput(int key) {
-	char act = 0;
-
-	// The player can always exit, restart, or change the map
+	// Log the input if it's something we're looking for
 	switch (key) {
 	case TAM_EXIT:
-		glfwSetWindowShouldClose(glfwWndPtr, GL_TRUE);
-		act = -1;
-		break;
-	case TAM_RESTART:
-		curRules->restart();
-		act = -1;
-		break;
 	case TAM_NEW_MAP:
-		// TO DO: Implement map choosing
-		// For now, treat it like a restart
-		curRules->restart();
-		act = -1;
+	case TAM_RESTART:
+	case TAM_UP:
+	case TAM_RIGHT:
+	case TAM_DOWN:
+	case TAM_LEFT:
+	case TAM_STAY:
+		inputKey = key;
 		break;
 	}
-	// First, is it the players turn?
-	if (curRules->curTurn() != TAM_TURN_THE) {
-		// Flush input
-		return;
-	}
-
-
-	// Debugging, output the commands given...
-	if (act >= 0) {
-		switch(key) {
-		case TAM_UP:
-			act = TAM_MOVE_NORTH;
-			break;
-		case TAM_RIGHT:
-			act = TAM_MOVE_EAST;
-			break;
-		case TAM_DOWN:
-			act = TAM_MOVE_SOUTH;
-			break;
-		case TAM_LEFT:
-			act = TAM_MOVE_WEST;
-			break;
-		case TAM_STAY:
-			act = TAM_MOVE_STAY;
-			break;
-		}
-	}
-
-	// If we're here, that means it was a move for Theseus!
-	// Try the move!
-	if (curRules->moveThe(act)) {
-		// Yeah, he moved!
-	}
-
-	else {
-		// He didn't move? D: Tell the player
-	}
-
-	curWnd->refresh();
 }
 
 // The main application loop, returns error code depending on exit status
 int TaM_GameManager::mainLoop() {
-	// Dirty hack
+	int turn;
+	// Game runs until it's set to close, use the glfw to check this. For now...
 	while (!glfwWindowShouldClose(glfwWndPtr)) {
+		curWnd->refresh();
+		// Check up on the GLFW events
 		glfwPollEvents();
+		turn = curRules->curTurn();
+
+		// Is it a command that can always be done?
+		switch (inputKey) {
+		case TAM_EXIT:	
+			// Then quit the program
+			glfwSetWindowShouldClose(glfwWndPtr, GL_TRUE);
+			continue;
+		case TAM_NEW_MAP:
+			// Begin loading a new map
+			// TO DO: Add map loading when this is available, for now, drop down to restart
+		case TAM_RESTART:
+			// Restart the map
+			curRules->restart();
+			// Refresh window to show change
+			curWnd->refresh();
+			continue;
+		}
+
+		// The following checks handle Game Over and game delay statuses
+		if (turn == TAM_TURN_END) {
+			// First and foremost, if the game is over, just idle
+			continue;
+		}
+		if (turn != TAM_TURN_THE) {
+			// It's not the player's turn. Flush input
+			inputKey = -1;
+		}
+
+		if (!canAct()) {
+			// Also, flush input if the delay hasn't passed
+			inputKey = -1;
+			continue;
+		}
+		
+		if (turn == TAM_TURN_THE) {
+			// It's the players turn, see if it's valid input
+			switch (inputKey) {
+			case TAM_STAY:
+				inputKey = TAM_MOVE_STAY;
+				break;
+			case TAM_UP:
+				inputKey = TAM_MOVE_NORTH;
+				break;
+			case TAM_RIGHT:
+				inputKey = TAM_MOVE_EAST;
+				break;
+			case TAM_DOWN:
+				inputKey = TAM_MOVE_SOUTH;
+				break;
+			case TAM_LEFT:
+				inputKey = TAM_MOVE_WEST;
+				break;
+			default:
+				// If it's not valid input, flush it
+				inputKey = -1;
+				continue;
+			}
+
+			// Attempt the move
+			if (!curRules->moveThe((char)(inputKey))) {
+				// Invalid move, flush it
+				inputKey = -1;
+				// TO DO: Add illegal move message
+				continue;
+			}
+
+			// An action was completed, reset the clock
+			setNextAction();
+
+			// Game state has been changed, refresh the window
+			curWnd->refresh();
+		}
+		else if (turn == TAM_TURN_MIN_1 || turn == TAM_TURN_MIN_2) {
+			// It's Minnie's turn, and she attacks!
+			minnieAttacks();
+
+			// An action was completed, reset the clock
+			setNextAction();
+
+			// Game state has been changed, refresh the window
+			curWnd->refresh();
+		}
 	}
 
 	return ALL_CLEAR;
@@ -135,5 +177,44 @@ bool TaM_GameManager::canAct() {
 }
 
 void TaM_GameManager::setNextAction() {
-	nextAction = clock() + (clock_t)(CLOCKS_PER_SEC * 0.5f);
+	nextAction = clock() + (clock_t)(CLOCKS_PER_SEC * 0.25f);
+}
+
+// Finds the next move for Minnie base on current game state
+void TaM_GameManager::minnieAttacks() {
+	// First, grab the direction vector for Minnie to reach Theseus
+	TaM_IntVector toTheseus = curRules->getTheseus()->getLoc() - curRules->getMinnie()->getLoc();
+
+	char moveDir = TAM_MOVE_STAY; // Sentinel value
+
+	// Horizontal check
+	if (toTheseus.get1() != 0) {
+		// If Minnie can get closer by moving in the x-axis
+		moveDir = (toTheseus.get1() > 0) ? TAM_MOVE_EAST : TAM_MOVE_WEST;
+
+		if (curRules->moveMin(moveDir)) {
+			// Yay! Move was successful
+			return;
+		}
+		else {
+			// Reset to sentinel
+			moveDir = TAM_MOVE_STAY;
+		}
+	}
+	// Maybe going vertical is the way?
+	if (toTheseus.get2() != 0) {
+		moveDir = (toTheseus.get2() > 0) ? TAM_MOVE_SOUTH : TAM_MOVE_NORTH;
+
+		if (curRules->moveMin(moveDir)) {
+			// Yay! Move was successful
+			return;
+		}
+		else {
+			// Reset to sentinel
+			moveDir = TAM_MOVE_STAY;
+		}
+	}
+
+	// If neither work, use the sentinel value to flip over to Theseus's turn
+	curRules->moveMin(TAM_MOVE_STAY);
 }

@@ -17,14 +17,22 @@ TaM_IntVector::TaM_IntVector() {
 	val2 = 0;
 }
 
-bool TaM_IntVector::equalTo(TaM_IntVector *oth) {
-	if ((this->val1 == oth->val1) && (this->val2 == oth->val2)) {
+bool TaM_IntVector::equalTo(TaM_IntVector oth) {
+	if ((val1 == oth.val1) && (val2 == oth.val2)) {
 		return true;
 	}
 
 	else {
 		return false;
 	}
+}
+
+TaM_IntVector TaM_IntVector::operator- (const TaM_IntVector &oth) {
+	TaM_IntVector tempy;
+	tempy.val1 = val1 - oth.val1;
+	tempy.val2 = val2 - oth.val2;
+
+	return tempy;
 }
 
 /****************************

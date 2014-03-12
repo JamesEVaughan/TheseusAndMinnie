@@ -1,7 +1,7 @@
 /*********************************
-	This is the header file for TaM_GameRules class. GameRules manages the activity
-	and changes to the game's state. Also handles control of Minnie. It is the main 
-	interface that the [Controller] uses to effect the game.
+	This is the header file for TaM_GameRules class. GameRules manages the 
+	activity and changes to the game's state. It is the main interface that the
+	[Controller] uses to effect the game.
 **********************************/
 #ifndef TAM_GAMERULES
 #define TAM_GAMERULES
@@ -10,11 +10,13 @@
 
 #include "TaM_Map.h"
 #include "TaM_Theseus.h"
+#include "TaM_Minnie.h"
 
 class TaM_GameRules {
 private:
 	TaM_Map *map;  // Current map
 	TaM_Theseus *the; // Theseus, the player character
+	TaM_Minnie *min; // Minnie, the horrible monster
 
 	int turn;
 
@@ -33,8 +35,9 @@ public:
 	int init(string mapName);
 
 	//***** Controller access *****
-	// Character
-	bool moveThe(char dir);  // Returns true move was valid, false if not
+	// Movement
+	bool moveThe(char dir);  // Attempts to move Theseus, returns true if successful
+	bool moveMin(char dir);  // Attempts to move Minnie, returns true if successful
 
 	// Map
 	void restart();  // Restarts game using the same map
@@ -45,6 +48,7 @@ public:
 	// Accessors, pass map, etc. for view components
 	TaM_Map *getMap() {return map;}
 	TaM_Theseus *getTheseus() {return the;}
+	TaM_Minnie *getMinnie() {return min;}
 };
 
 #endif

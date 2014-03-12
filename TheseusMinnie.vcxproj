@@ -68,6 +68,7 @@
     <ClCompile Include="TaM_LineList.cpp" />
     <ClCompile Include="TaM_main.cpp" />
     <ClCompile Include="TaM_Map.cpp" />
+    <ClCompile Include="TaM_Minnie.cpp" />
     <ClCompile Include="TaM_simpleTypes.cpp" />
     <ClCompile Include="TaM_Theseus.cpp" />
     <ClCompile Include="TaM_Window.cpp" />
@@ -79,6 +80,7 @@
     <ClInclude Include="TaM_GameDisplay.h" />
     <ClInclude Include="TaM_GameManager.h" />
     <ClInclude Include="TaM_GameRules.h" />
+    <ClInclude Include="TaM_Minnie.h" />
     <ClInclude Include="TaM_Window.h" />
     <ClInclude Include="TaM_Drawable.h" />
     <ClInclude Include="TaM_ActorDrawList.h" />

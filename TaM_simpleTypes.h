@@ -30,7 +30,10 @@ public:
 	void set2(int new2) {val2 = new2;}
 
 	// Returns true if this == oth
-	bool equalTo(TaM_IntVector *oth);
+	bool equalTo(TaM_IntVector oth);
+
+	// Overloading Operators
+	TaM_IntVector operator- (const TaM_IntVector &oth);
 };
 
 class TaM_FloatVector {

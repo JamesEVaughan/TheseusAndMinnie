@@ -29,8 +29,12 @@ private:
 	// Helper functions
 	// Return true only if clock() > nextAction
 	bool canAct();
+
 	// Sets nextAction to a new value after a completed action
 	void setNextAction();
+
+	// Minnie attempts to catch the pesky Theseus
+	void minnieAttacks();
 
 public:
 	// Constructor/destructors

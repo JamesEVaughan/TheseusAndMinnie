@@ -48,7 +48,7 @@
 // Colors in (R, G, B), floats, for use in glColr3f()
 #define	TAM_COLOR_WALL	0.f, 0.9f, 0.f
 #define	TAM_COLOR_THE	0.f, 0.f, 0.8f
-#define	TAM_COLOR_MIN	0.75f, 0.5f, 0.5f	// Pink?
+#define	TAM_COLOR_MIN	0.9f, 0.15f, 0.6f	// Pink?
 #define TAM_COLOR_END	0.9f, 0.f, 0.f
 #define TAM_COLOR_BG	9.f, 9.f, 9.f	// Black
 
@@ -100,6 +100,7 @@
 // Turns
 #define TAM_TURN_END	0
 #define TAM_TURN_THE	1
-#define TAM_TURN_MIN	2
+#define TAM_TURN_MIN_1	2
+#define TAM_TURN_MIN_2	3
 
 #endif
