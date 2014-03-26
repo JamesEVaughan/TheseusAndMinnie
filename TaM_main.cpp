@@ -29,7 +29,7 @@ int main(int argc, char *args[]) {
 	int err = ALL_CLEAR;
 	TaM_GameManager ctrl;
 
-	err = ctrl.init((string)(MAP_DIR) + "Map1.tam");
+	err = ctrl.init((string)(MAP_DIR) + "Map2.tam");
 	if (err) {
 		// This is a non-recoverable error
 		TaM_error(err);

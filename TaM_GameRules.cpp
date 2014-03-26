@@ -92,6 +92,7 @@ bool TaM_GameRules::moveMin(char dir) {
 void TaM_GameRules::restart() {
 	// Put characters back to starting locations
 	the->init(map->getTheseus());
+	min->init(map->getMinnie());
 
 	// Make it Theseus's turn
 	turn = TAM_TURN_THE;

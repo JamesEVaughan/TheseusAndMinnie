@@ -177,7 +177,7 @@ bool TaM_GameManager::canAct() {
 }
 
 void TaM_GameManager::setNextAction() {
-	nextAction = clock() + (clock_t)(CLOCKS_PER_SEC * 0.25f);
+	// this is a placeholder, use no input delay for now
 }
 
 // Finds the next move for Minnie base on current game state

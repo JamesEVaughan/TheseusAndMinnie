@@ -8,9 +8,16 @@ using namespace std;
 
 // Constructors/destructors
 TaM_Map::TaM_Map() {
-	spaces = NULL;
 	name = "";
 	wallHelper = new TaM_LineList(TAM_COLOR_WALL);
+
+	// Set all dynamically created vars to NULL
+	spaces = NULL;
+	sizeSq = NULL;
+	topLeft = NULL;
+	startTheseus = NULL;
+	startMinnie = NULL;
+	theEnd = NULL;
 }
 
 TaM_Map::~TaM_Map() {
@@ -53,7 +60,7 @@ int TaM_Map::init(string mapName) {
 
 int TaM_Map::loadMap(string name) {
 	ifstream ifMap(name, ios::in | ios::binary|ios::ate);
-	int errCode = 0;
+	int errCode = ALL_CLEAR;
 	if (!ifMap.is_open()) {
 		// Map won't open, not our problem
 		// Make all output pointers NULL
@@ -72,7 +79,8 @@ int TaM_Map::loadMap(string name) {
 
 	// Sanity check
 	if (szMap < (sizeSq->get1() * sizeSq->get2())) {
-		// Map is bad
+		// Map is bad, close file and leave
+		ifMap.close();
 		return ERR_MAP_BAD;
 	}
 
@@ -86,17 +94,17 @@ int TaM_Map::loadMap(string name) {
 		delete[] spaces;
 		if (ifMap.eof()) {
 			// The map file is too short
-			return ERR_MAP_EOF;
+			errCode = ERR_MAP_EOF;
 		}
 		else {
 			// The map file is just bad
-			return ERR_MAP_BAD;
+			errCode = ERR_MAP_BAD;
 		}
 	}
 
 	// Now close up shop
 	ifMap.close();
-	return ALL_CLEAR;
+	return errCode;
 }
 
 int TaM_Map::findPoints() {
